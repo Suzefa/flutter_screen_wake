@@ -4,27 +4,37 @@ version '1.0'
 buildscript {
     repositories {
         google()
-        jcenter()
+        mavenCentral() // Replace jcenter (deprecated) with mavenCentral
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.0'
+        classpath 'com.android.tools.build:gradle:8.0.2' // Use a newer Gradle plugin version
     }
 }
 
 rootProject.allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 }
 
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 33 // Update to 33 to resolve lStar issue
 
     defaultConfig {
         minSdkVersion 16
+        targetSdkVersion 33 // Keep this in sync with compileSdkVersion
+    }
+
+    buildFeatures {
+        viewBinding true // Optional, depending on plugin requirements
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 }
